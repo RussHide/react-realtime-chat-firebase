@@ -13,7 +13,6 @@ const SearchUser = ({ setFilteredUsers }) => {
             querySnapshot.forEach((doc) => {
                 setFilteredUsers(() => [doc.data()])
             });
-
         } catch (error) {
             console.log(error);
         }

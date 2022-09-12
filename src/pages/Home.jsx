@@ -1,6 +1,7 @@
 import { doc, getDoc, getDocs, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore'
 import React, { useContext, useEffect, useState } from 'react'
 import ChatPerson from '../components/ChatPerson'
+import Chats from '../components/Chats'
 import ChatSide from '../components/ChatSide'
 import MessageInput from '../components/MessageInput'
 import Profile from '../components/Profile'
@@ -48,6 +49,7 @@ const Home = () => {
       console.log(error);
     }
   }
+  console.log(filteredUsers);
 
   return (
     <div className="flex h-screen antialiased text-gray-800">
@@ -81,11 +83,10 @@ const Home = () => {
             <SearchUser setFilteredUsers={setFilteredUsers} />
             {/* Conversations */}
 
-            <div >
-              <span className="font-bold">Conversations</span>
-              <div className="flex flex-col space-y-1 mt-4 -mx-2 h-full overflow-y-auto">
-                {/*  {
-                  filteredUsers.length > 0 ? filteredUsers.map((person, index) => (
+            <div>
+              <Chats handleSelectNewChat={handleSelectNewChat}>
+             {/*  {
+                  filteredUsers.length !== undefined ? filteredUsers.map((person, index) => (
                     <div>
                       <ChatPerson key={index} person={person} handleSelectNewChat={handleSelectNewChat} />
                       <hr />
@@ -95,28 +96,17 @@ const Home = () => {
                     <hr />
                   </div>
                 } */}
-                {
-                  [
-                    {
-                      email: "graadev@gmail.com",
-                      displayName: "Fabian Hide",
-                      uid: "NziCBh4zg7PPpoJbq23fHmRC7Jz2"
-                    }
-                  ].map((person, index) => (
-                    <ChatPerson key={index} displayName={person.displayName} uid={person.uid} handleSelectNewChat={handleSelectNewChat} />
-                  ))
-                }
-              </div>
+              </Chats>
             </div>
 
-            <div className=''>
+           {/*  <div className=''>
               <div className="flex flex-row items-center justify-between text-xs mt-6">
               </div>
               <span className="font-bold">Archivied</span>
               <div className="flex flex-col space-y-1 mt-4 -mx-2">
                 <ChatPerson />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <ChatSide />
